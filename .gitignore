@@ -1,0 +1,12 @@
+*.beam
+*.ez
+/build
+erl_crash.dump
+
+node_modules
+.direnv
+.devenv
+
+arctic_build
+arctic_vite_config.js
+.arctic_cache.csv

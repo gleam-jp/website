@@ -1,0 +1,9 @@
+{
+  "dependencies": {},
+  "devDependencies": {
+    "@ameinhardt/unocss-preset-daisy": "^1.1.8",
+    "@unocss/cli": "^66.4.2",
+    "@unocss/preset-wind4": "^66.4.2",
+    "unocss": "^66.4.2"
+  }
+}

@@ -1,0 +1,42 @@
+name: Deploy to Cloudflare Worker Assets
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Gleam and Bun
+        uses: jdx/mise-action@v2
+        with:
+          install: true
+          install_args: "gleam bun"
+
+      - name: Setup Gleam and Bun
+        run: |
+          mise use -g gleam
+          mise use -g bun
+
+      - name: Install UnoCSS dependencies
+        run: npm install
+
+      - name: Build CSS with UnoCSS
+        run: bunx unocss "src/**/*.gleam" --config uno.config.ts --out-file public/style.css
+
+      - name: Build Gleam project
+        run: gleam run
+
+      - name: Deploy to Cloudflare
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name gleam-jp-website --compatibility-date 2024-06-01
