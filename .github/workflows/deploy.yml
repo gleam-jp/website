@@ -26,7 +26,7 @@ jobs:
           mise use -g bun
 
       - name: Install UnoCSS dependencies
-        run: npm install
+        run: bun install
 
       - name: Build CSS with UnoCSS
         run: bunx unocss "src/**/*.gleam" --config uno.config.ts --out-file public/style.css
