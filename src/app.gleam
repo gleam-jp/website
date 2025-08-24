@@ -1,9 +1,10 @@
 import arctic
 import gleam/list
-import lustre/attribute.{class, href, rel, target}
+import lustre/attribute.{class, href, lang, rel, target}
 import lustre/element.{type Element, text}
 import lustre/element/html.{
-  a, body, div, footer, h1, h2, h3, head, header, html, li, link, nav, p, section, ul, meta
+  a, body, div, footer, h1, h2, h3, head, header, html, li, link, meta, nav, p,
+  section, ul,
 }
 
 const cosense_url = "https://scrapbox.io/gleam-jp/"
@@ -29,16 +30,21 @@ const offcial_libraries = [
   #("", "", ""),
 ]
 
-
 fn html_head() {
   head([], [
     link([rel("stylesheet"), href("/public/style.css")]),
-    meta([attribute.name("viewport"), attribute.content("width=device-width, initial-scale=1.0")])
+    meta([
+      attribute.name("viewport"),
+      attribute.content("width=device-width, initial-scale=1.0"),
+    ]),
+    meta([
+      attribute.charset("UTF-8"),
+    ]),
   ])
 }
 
 pub fn index(_collection: List(arctic.ProcessedCollection)) {
-  html([], [html_head(), html_body()])
+  html([lang("ja")], [html_head(), html_body()])
 }
 
 fn html_body() {
@@ -87,9 +93,7 @@ fn html_body() {
           [
             div([class("text-left")], [
               p([class("mb-4")], [
-                text(
-                  "GleamはErlang/JavaScriptで動作する静的型付けな関数型言語です。",
-                ),
+                text("GleamはErlang/JavaScriptで動作する静的型付けな関数型言語です。"),
               ]),
               p([class("mb-4")], [
                 text("ifやforがなく、パターンマッチや再帰でフローを構築するなど、シンプルな構文が特徴です。"),
@@ -102,7 +106,7 @@ fn html_body() {
               ul([class("list-none space-y-2")], [
                 li([], [text("🛡️ 型安全性とパターンマッチング")]),
                 li([], [text("💎 不変データ構造")]),
-                li([], [text("🌐 Actor modelによる並行処理")]), 
+                li([], [text("🌐 Actor modelによる並行処理")]),
               ]),
             ]),
           ],
@@ -126,7 +130,11 @@ fn html_body() {
       ),
 
       // Resources Section
-      section_with_id("mb-2 md:mb-16 mt-12 md:mt-16", "resources", "ドキュメントとライブラリ"),
+      section_with_id(
+        "mb-2 md:mb-16 mt-12 md:mt-16",
+        "resources",
+        "ドキュメントとライブラリ",
+      ),
       section([class("mb-12 md:mb-16")], [
         div(
           [
@@ -145,8 +153,12 @@ fn html_body() {
       footer([class("text-gleam-white py-8")], [
         div([class("h-1 bg-black rounded-full w-60 md:w-80 mx-auto mb-4")], []),
         div([class("container mx-auto px-4 text-center")], [
-          p([class("mb-4 text-base md:text-lg text-faffPink font-bold")], [text("gleam-jp")]),
-          p([class("text-base md:text-sm text-black-300")], [text("© 2024 gleam-jp some rights reserved.")]),
+          p([class("mb-4 text-base md:text-lg text-faffPink font-bold")], [
+            text("gleam-jp"),
+          ]),
+          p([class("text-base md:text-sm text-black-300")], [
+            text("© 2024 gleam-jp some rights reserved."),
+          ]),
         ]),
       ]),
     ]),
@@ -174,7 +186,6 @@ fn cta_button(url: String, title: String, is_primary: Bool) -> Element(msg) {
   )
 }
 
-
 fn section_with_id(
   margin_class: String,
   id: String,
@@ -197,14 +208,9 @@ fn card(
 ) -> Element(msg) {
   let base_classes = "border-2 p-6 rounded-lg"
   let card_classes = case content {
-    ResourceLinks(_) ->
-      base_classes
-      <> " bg-gleam-white p-8 shadow-faffpink"
-    CommunityInfo(_, _,) ->
-      base_classes
-      <> " border-"
-      <> color_class
-      <> " shadow-faffpink"
+    ResourceLinks(_) -> base_classes <> " bg-gleam-white p-8 shadow-faffpink"
+    CommunityInfo(_, _) ->
+      base_classes <> " border-" <> color_class <> " shadow-faffpink"
   }
 
   let content_elements = case content {
@@ -230,7 +236,9 @@ fn card(
         [
           href(link),
           target("_blank"),
-          class("block text-center border-2 border-black px-4 py-2 rounded-lg max-w-40 mx-auto hover:bg-faffPink transition-colors duration-500"),
+          class(
+            "block text-center border-2 border-black px-4 py-2 rounded-lg max-w-40 mx-auto hover:bg-faffPink transition-colors duration-500",
+          ),
         ],
         [text("参加する")],
       ),
@@ -243,7 +251,6 @@ fn card(
   ])
 }
 
-
 fn community_card(title: String, link: String) {
   card(title, CommunityInfo("", link), "")
 }
@@ -251,7 +258,14 @@ fn community_card(title: String, link: String) {
 fn resource_link(url: String, emoji: String, link_text: String) -> Element(msg) {
   a([href(url), target("_blank"), class("flex items-center gap-2")], [
     div([class("flex-shrink-0")], [element.text(emoji)]),
-    div([class("relative overflow-hidden px-1 py-0.5 hover:bg-faffPink transition-colors duration-300")], [element.text(link_text)]),
+    div(
+      [
+        class(
+          "relative overflow-hidden px-1 py-0.5 hover:bg-faffPink transition-colors duration-300",
+        ),
+      ],
+      [element.text(link_text)],
+    ),
   ])
 }
 
