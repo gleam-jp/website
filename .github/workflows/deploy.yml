@@ -29,7 +29,9 @@ jobs:
         run: bun install
 
       - name: Build CSS with UnoCSS
-        run: bunx unocss "src/**/*.gleam" --config uno.config.ts --out-file public/style.css
+        run: |
+          bunx unocss "src/**/*.gleam" --config uno.config.ts --out-file public/style.css
+          bunx lightningcss-cli ./public/style.css -o ./public/style.css -m
 
       - name: Build Gleam project
         run: gleam run
