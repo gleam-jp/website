@@ -3,8 +3,8 @@ import gleam/list
 import lustre/attribute.{class, href, lang, rel, target}
 import lustre/element.{type Element, text}
 import lustre/element/html.{
-  a, body, div, footer, h1, h2, h3, head, header, html, li, link, meta, nav, p,
-  section, ul,
+  a, body, div, footer, h1, h2, h3, head, header, html, li, link, main, meta, nav, p,
+  section, span, title, ul,
 }
 
 const cosense_url = "https://scrapbox.io/gleam-jp/"
@@ -27,19 +27,57 @@ const offcial_libraries = [
   #("https://hexdocs.pm/gleam_stdlib/", "🌟", "標準ライブラリ"),
   #("https://hexdocs.pm/gleam_http/", "🕸️", "HTTPの型と関数の定義"),
   #("https://hexdocs.pm/gleam_otp/", "⚙️", "OTPライブラリ"),
-  #("", "", ""),
 ]
 
 fn html_head() {
   head([], [
-    link([rel("stylesheet"), href("/public/style.css")]),
+    title([], "gleam-jp"),
+    meta([
+      attribute.charset("UTF-8"),
+    ]),
     meta([
       attribute.name("viewport"),
       attribute.content("width=device-width, initial-scale=1.0"),
     ]),
     meta([
-      attribute.charset("UTF-8"),
+      attribute.name("description"),
+      attribute.content("Gleam言語の日本コミュニティ。Gleamは型安全で関数型のプログラミング言語です。学習リソース、ライブラリ情報、コミュニティ参加方法を提供しています。"),
     ]),
+    meta([
+      attribute.name("keywords"),
+      attribute.content("Gleam,プログラミング言語,関数型,型安全,Erlang,JavaScript,日本,コミュニティ"),
+    ]),
+    // Open Graph tags
+    meta([
+      attribute.attribute("property", "og:title"),
+      attribute.content("gleam-jp - Gleam言語の日本コミュニティ"),
+    ]),
+    meta([
+      attribute.attribute("property", "og:description"),
+      attribute.content("Gleam言語の日本コミュニティ。学習リソース、ライブラリ情報、コミュニティ参加方法を提供。"),
+    ]),
+    meta([
+      attribute.attribute("property", "og:type"),
+      attribute.content("website"),
+    ]),
+    meta([
+      attribute.attribute("property", "og:site_name"),
+      attribute.content("gleam-jp"),
+    ]),
+    // Twitter Card tags
+    meta([
+      attribute.name("twitter:card"),
+      attribute.content("summary"),
+    ]),
+    meta([
+      attribute.name("twitter:title"),
+      attribute.content("gleam-jp - Gleam言語の日本コミュニティ"),
+    ]),
+    meta([
+      attribute.name("twitter:description"),
+      attribute.content("Gleam言語の日本コミュニティ。学習リソース、ライブラリ情報、コミュニティ参加方法を提供。"),
+    ]),
+    link([rel("stylesheet"), href("/public/style.css")]),
   ])
 }
 
@@ -50,20 +88,37 @@ pub fn index(_collection: List(arctic.ProcessedCollection)) {
 fn html_body() {
   body([class("scroll-smooth")], [
     div([class("min-h-screen bg-white mx-2 md:mx-20")], [
-      header([class("bg-gleam-underwater-blue text-gleam-white py-6")], [
-        nav([class("container mx-auto px-4")], [
+      header([
+        class("bg-gleam-underwater-blue text-gleam-white py-6"),
+        attribute.attribute("role", "banner")
+      ], [
+        nav([
+          class("container mx-auto px-4"),
+          attribute.attribute("role", "navigation"),
+          attribute.attribute("aria-label", "メインナビゲーション")
+        ], [
           div([class("flex items-center justify-between")], [
-            h1([class("text-xl md:text-2xl font-bold text-faffPink")], [
+            div([class("text-xl md:text-2xl font-bold text-faffPink")], [
               text("gleam-jp"),
             ]),
           ]),
         ]),
       ]),
 
-      div([class("container mx-auto px-2 md:px-4 py-8 md:py-12")], [
+      main([
+        class("container mx-auto px-2 md:px-4 py-8 md:py-12"),
+        attribute.id("main-content"),
+        attribute.attribute("role", "main")
+      ], [
         // Hero Section
-        section([class("text-center mb-12 md:mb-16")], [
-          h1([class("text-4xl md:text-6xl font-bold mb-4 text-faffPink")], [
+        section([
+          class("text-center mb-12 md:mb-16"),
+          attribute.attribute("aria-labelledby", "hero-title")
+        ], [
+          h1([
+            class("text-4xl md:text-6xl font-bold mb-4 text-faffPink"),
+            attribute.id("hero-title")
+          ], [
             text("gleam-jp"),
           ]),
           p([class("text-xl md:text-xl mb-6 md:mb-8 text-fabb-700")], [
@@ -104,9 +159,18 @@ fn html_body() {
                 text("主な特徴"),
               ]),
               ul([class("list-none space-y-2")], [
-                li([], [text("🛡️ 型安全性とパターンマッチング")]),
-                li([], [text("💎 不変データ構造")]),
-                li([], [text("🌐 Actor modelによる並行処理")]),
+                li([], [
+                  span([attribute.attribute("aria-hidden", "true")], [text("🛡️ ")]),
+                  text("型安全性とパターンマッチング")
+                ]),
+                li([], [
+                  span([attribute.attribute("aria-hidden", "true")], [text("💎 ")]),
+                  text("不変データ構造")
+                ]),
+                li([], [
+                  span([attribute.attribute("aria-hidden", "true")], [text("🌐 ")]),
+                  text("Actor modelによる並行処理")
+                ]),
               ]),
             ]),
           ],
@@ -150,7 +214,10 @@ fn html_body() {
       ]),
 
       // Footer Section
-      footer([class("text-gleam-white py-8")], [
+      footer([
+        class("text-gleam-white py-8"),
+        attribute.attribute("role", "contentinfo")
+      ], [
         div([class("h-1 bg-black rounded-full w-60 md:w-80 mx-auto mb-4")], []),
         div([class("container mx-auto px-4 text-center")], [
           p([class("mb-4 text-base md:text-lg text-faffPink font-bold")], [
@@ -181,6 +248,10 @@ fn cta_button(url: String, title: String, is_primary: Bool) -> Element(msg) {
         False -> class("")
       },
       class(button_class),
+      case is_primary {
+        True -> attribute.attribute("aria-describedby", "external-link-desc")
+        False -> class("")
+      },
     ],
     [text(title)],
   )
@@ -239,6 +310,7 @@ fn card(
           class(
             "block text-center border-2 border-black px-4 py-2 rounded-lg max-w-40 mx-auto hover:bg-faffPink transition-colors duration-500",
           ),
+          attribute.attribute("aria-label", "参加する (新しいタブで開く)"),
         ],
         [text("参加する")],
       ),
@@ -256,17 +328,28 @@ fn community_card(title: String, link: String) {
 }
 
 fn resource_link(url: String, emoji: String, link_text: String) -> Element(msg) {
-  a([href(url), target("_blank"), class("flex items-center gap-2")], [
-    div([class("flex-shrink-0")], [element.text(emoji)]),
-    div(
-      [
-        class(
-          "relative overflow-hidden px-1 py-0.5 hover:bg-faffPink transition-colors duration-300",
-        ),
-      ],
-      [element.text(link_text)],
-    ),
-  ])
+  case url {
+    "" -> div([], [])
+    _ -> a([
+      href(url), 
+      target("_blank"), 
+      class("flex items-center gap-2"),
+      attribute.attribute("aria-label", link_text <> " (新しいタブで開く)")
+    ], [
+      span([
+        class("flex-shrink-0"),
+        attribute.attribute("aria-hidden", "true")
+      ], [element.text(emoji)]),
+      div(
+        [
+          class(
+            "relative overflow-hidden px-1 py-0.5 hover:bg-faffPink transition-colors duration-300",
+          ),
+        ],
+        [element.text(link_text)],
+      ),
+    ])
+  }
 }
 
 fn resource_section(
