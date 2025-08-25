@@ -3,6 +3,9 @@
     "@ameinhardt/unocss-preset-daisy": "^1.1.8",
     "@unocss/cli": "^66.4.2",
     "@unocss/preset-wind4": "^66.4.2",
+    "csso-cli": "^4.0.2",
+    "html-minifier-terser": "^7.2.0",
+    "terser": "^5.43.1",
     "unocss": "^66.4.2"
   }
 }
