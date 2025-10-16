@@ -19,6 +19,7 @@ jobs:
         with:
           otp-version: 'latest'
           gleam-version: 'latest'
+          rebar3-version: 'latest'
 
       - name: setup-bun
         uses: oven-sh/setup-bun@v2
