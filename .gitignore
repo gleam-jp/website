@@ -10,3 +10,7 @@ node_modules
 arctic_build
 arctic_vite_config.js
 .arctic_cache.csv
+
+#Added automatically by Lustre Dev Tools
+/.lustre
+/dist
