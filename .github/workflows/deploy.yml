@@ -18,7 +18,7 @@ jobs:
         uses: jdx/mise-action@v2
         with:
           install: true
-          install_args: "gleam bun"
+          install_args: "gleam bun erlang"
 
       - name: Setup Gleam and Bun
         run: |
