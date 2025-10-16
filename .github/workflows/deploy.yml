@@ -24,8 +24,9 @@ jobs:
         run: |
           mise use -g gleam
           mise use -g bun
+          mise use -g erlang
 
-      - name: Install UnoCSS dependencies
+      - name: Install dependencies
         run: bun install
 
       - name: Build Gleam project
