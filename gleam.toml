@@ -18,9 +18,27 @@ gleam_stdlib = ">= 0.44.0 and < 2.0.0"
 lustre = ">= 5.1.1 and < 6.0.0"
 arctic = ">= 11.0.10 and < 12.0.0"
 snag = ">= 1.1.0 and < 2.0.0"
+plinth = ">= 0.7.2 and < 1.0.0"
 
 [dev-dependencies]
 gleeunit = ">= 1.0.0 and < 2.0.0"
+lustre_dev_tools = ">= 2.1.2 and < 3.0.0"
 
 [javascript]
 runtime = "bun"
+
+[tools.lustre.bin]
+bun = "system"
+tailwind = "system"
+
+[tools.lustre.build]
+minify = true
+outdir = "dist"
+
+[tools.lustre.dev]
+host = "0.0.0.0"
+
+[tools.lustre.html]
+title = "gleam-jp"
+stylesheets = [{ href = "/website.css" }]
+scripts = [{ src = "/website.js" }]
