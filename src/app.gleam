@@ -43,9 +43,7 @@ fn html_head() {
     ]),
     meta([
       attribute.name("description"),
-      attribute.content(
-        "Gleam言語の日本コミュニティ。Gleamは型安全で関数型のプログラミング言語です。学習リソース、ライブラリ情報、コミュニティ参加方法を提供しています。",
-      ),
+      attribute.content("Gleam言語の日本コミュニティ"),
     ]),
     meta([
       attribute.name("keywords"),
