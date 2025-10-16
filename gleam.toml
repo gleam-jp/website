@@ -42,3 +42,12 @@ host = "0.0.0.0"
 title = "gleam-jp"
 stylesheets = [{ href = "/website.css" }]
 scripts = [{ src = "/website.js" }]
+
+meta = [
+  { property = "og:url", content = "https://gleam-jp.org" },
+  { property = "og:image", content = "https://gleam-jp.org/ogp.png" },
+  { property = "twitter:card", content = "summary_large_image" },
+  { property = "twitter:title", content = "gleam-jp" },
+  { property = "twitter:description", content = "Gleam言語の日本コミュニティ" },
+  { property = "twitter:image", content = "https://gleam-jp.org/ogp.png" },
+]

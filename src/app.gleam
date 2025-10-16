@@ -51,37 +51,6 @@ fn html_head() {
       attribute.name("keywords"),
       attribute.content("Gleam,プログラミング言語,関数型,型安全,Erlang,JavaScript,日本,コミュニティ"),
     ]),
-    // Open Graph tags
-    meta([
-      attribute.attribute("property", "og:title"),
-      attribute.content("gleam-jp - Gleam言語の日本コミュニティ"),
-    ]),
-    meta([
-      attribute.attribute("property", "og:description"),
-      attribute.content("Gleam言語の日本コミュニティ。学習リソース、ライブラリ情報、コミュニティ参加方法を提供。"),
-    ]),
-    meta([
-      attribute.attribute("property", "og:type"),
-      attribute.content("website"),
-    ]),
-    meta([
-      attribute.attribute("property", "og:site_name"),
-      attribute.content("gleam-jp"),
-    ]),
-    // Twitter Card tags
-    meta([
-      attribute.name("twitter:card"),
-      attribute.content("summary"),
-    ]),
-    meta([
-      attribute.name("twitter:title"),
-      attribute.content("gleam-jp - Gleam言語の日本コミュニティ"),
-    ]),
-    meta([
-      attribute.name("twitter:description"),
-      attribute.content("Gleam言語の日本コミュニティ。学習リソース、ライブラリ情報、コミュニティ参加方法を提供。"),
-    ]),
-    link([rel("stylesheet"), href("/public/style.css")]),
   ])
 }
 
