@@ -14,17 +14,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Gleam and Bun
-        uses: jdx/mise-action@v2
+      - name: setup-beam
+        uses: erlef/setup-beam@v1.20.4
         with:
-          install: true
-          install_args: "gleam bun erlang"
+          otp-version: 'latest'
+          gleam-version: 'latest'
 
-      - name: Setup Gleam and Bun
-        run: |
-          mise use -g gleam
-          mise use -g bun
-          mise use -g erlang
+      - name: setup-bun
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "latest"
 
       - name: Install dependencies
         run: bun install
